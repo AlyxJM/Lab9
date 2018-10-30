@@ -16,6 +16,8 @@ public class EmployeeDatabase {
      * List of employees.
      */
     public List<Employee> employees;
+    /** count of managers. */
+    private int managerCount = 0;
 
     /**
      * Constructor which initializes the employees list.
@@ -30,13 +32,13 @@ public class EmployeeDatabase {
     /**
      * Returns the manager for the given employee.
      *
-     * @param employee
-     * @return
+     * @param employee the employee that to find the manager of
+     * @return the manager of the employee
      */
     Employee findManager(final Employee employee) {
         Employee manager = null;
         for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getName() == employee.getManager()) {
+            if (employees.get(i).getName().equals(employee.getManager())) {
                 manager = employees.get(i);
                 break;
             }
@@ -56,6 +58,13 @@ public class EmployeeDatabase {
         /*
          * Implement this function
          */
+
+        //Recursive
+        if (findManager(employee) == null) {
+            return managerCount;
+        }
+        managerCount++;
+        return countManagersAbove(findManager(employee));
     }
 
     /**
@@ -70,6 +79,8 @@ public class EmployeeDatabase {
         /*
          * Implement this function
          */
+
+        return -1;
     }
 
     /**
